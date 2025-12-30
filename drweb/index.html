@@ -79,13 +79,7 @@
               const requiredKey = "deltaverif";
               const requiredValue = "fea2fb654f17156a8393d060f5b8a2d3833fdf96325b698da7596c76a2d041e9";
 
-              const storedValue = localStorage.getItem(requiredKey);
-
-              if (storedValue !== requiredValue) {
-                  await loadplay("https://cdn.jsdelivr.net/gh/HorizonOfficia/oh-you-think-ur-smart@main/drweb/verif.html");
-              } else {
-                  await loadplay("https://cdn.jsdelivr.net/gh/HorizonOfficia/oh-you-think-ur-smart@main/drweb/play/index.html");
-              }
+              await loadplay("https://cdn.jsdelivr.net/gh/HorizonOfficia/oh-you-think-ur-smart@main/drweb/play/index.html");
           });
           
           const base = document.querySelector('base')?.href || window.location.origin;
@@ -104,7 +98,3 @@
           </script>
   </body>
 </html>
-
-<!-- DELTARUNEWeb v6 LTS -->
-<!-- made with ❤️ by .shortpie. -->
-<!-- credits to Toby Fox for making DELTARUNE, we love you! -->
