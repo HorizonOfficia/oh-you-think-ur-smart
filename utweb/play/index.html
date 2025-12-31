@@ -26,11 +26,11 @@
       </div>
       <div class="output-container" id="output-container">
       <button class="output-button" id="fullscreen" title="Toggle Fullscreen">Toggle Fullscreen?</button>
-      <button class="output-button" onclick="toggleConsole()" title="Lists emscripten/GM console output and loading progress">Toggle Console!</button>
-      <button class="output-button" id="stats-button" onclick="toggleFPS()" title="Toggles the external FPS Counter">Toggle FPS Counter!</button>
-      <button class="output-button" onclick="window.SAVEManager.openSAVEManager()" title="Manage your UNDERTALE SAVE files">SAVE Manager!</button>
-      <button class="output-button" onclick="toggleWASD(this)" title="Toggles Mirroring Arrow Keys to WASD for easier control">Mirror WASD to Arrows!</button>
-      <input id="colorpicker" type="color" onchange="changecolor(this)" title="Changes color of the canvas' surrounding areas">
+      <button class="output-button" onclick="toggleConsole()" title="Lists emscripten/GM console output and loading progress">Console</button>
+      <button class="output-button" id="stats-button" onclick="toggleFPS()" title="Toggles the external FPS Counter">FPS Counter</button>
+      <button class="output-button" onclick="window.SAVEManager.openSAVEManager()" title="Manage your UNDERTALE SAVE files">SAVE Manager</button>
+      <button class="output-button" onclick="toggleWASD(this)" title="Toggles Mirroring Arrow Keys to WASD for easier control">Arrows -> WASD</button>
+      <button class="output-button" onclick="forcemobile" title="Forces mobile, enabling joystick">Force Mobile</button>
       <textarea id="output"></textarea>
     </div>
     <button id="closeUIButton" onclick="hideUI()">&times;</button>
