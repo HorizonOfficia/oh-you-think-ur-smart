@@ -3,80 +3,102 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>.shortpie.'s LocalSpace!</title>
-    <base href="https://cdn.jsdelivr.net/gh/HorizonOfficia/oh-you-think-ur-smart@main/">
+    <title>spec1al web ports</title>
+    <base href="https://cdn.jsdelivr.net/gh/HorizonOfficia/oh-you-think-ur-smart@latest/">
     <meta name="theme-color" content="#000000" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/HorizonOfficia/oh-you-think-ur-smart@main/style.css" />
-    <link rel="icon" href="https://cdn.jsdelivr.net/gh/HorizonOfficia/oh-you-think-ur-smart@main/fav.ico" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/HorizonOfficia/oh-you-think-ur-smart@latest/utweb/style.css" />
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/HorizonOfficia/oh-you-think-ur-smart@latest/utweb/fav.ico" />
   </head>
-
   <body>
     <div class="container">
-      <h2 style="font-family: '8BitOperator', sans-serif;">welcome to</h2>
-      <h1 class="shortpie">&nbsp;.shortpie.'s</h1>
-      <br><br>
-      <img src="localspace.png" alt="LocalSpace!" class="logo" />
-
+      <h1 class="shortpie">&nbsp;imspec1al's</h1>
+      <br>
+      <img style="margin: 0;" src="utweb/undertale_logo.jpg" alt="UNDERTALE" class="logo" />
+      <h1>webport</h1>
+      <audio id="audio-player" preload="auto"></audio>
       <div class="button-group">
-        <div class="chapter-buttons">
-          <button id="drweb" class="chapter-button-3">
-            <span class="button-label">DELTARUNEWeb</span>
-          </button>
-          <button id="utweb" class="chapter-button-1">
-            <span class="button-label">UNDERTALEWeb</span>
-          </button>
-        </div>
-
-        <div class="othersite-button">
-          <button id="abb" class="chapter-button-4">
-            <span class="button-label">Open in about:blank?</span>
-          </button>
-        </div>
+          <div id="chapterButtons" class="chapter-buttons">
+            <button id="10th" class="chapter-button-3">
+              <span class="button-label">10TH ANNIVERSARY BATTLE (peak)</span>
+            </button>
+            <button id="play" class="chapter-button-1">
+              <span class="button-label">UNDERTALE</span>
+            </button>
+            <button id="ostPlayerButton" class="chapter-button-2">
+              <span class="button-label">MUSIC PLAYER</span>
+            </button>
+          </div>
+          <div id="chapterButtons" class="othersite-button">
+            <button id="drweb" class="chapter-button-4">
+              <span class="button-label">DELTARUNE</span>
+            </button>
+            <button id="utyweb" class="chapter-button-4">
+              <span class="button-label">UNDERTALE-YELLOW</span>
+            </button>
+          </div>
       </div>
-
-      <h5 id="discord-link" style="font-size: 23px; margin-bottom: 14px; margin-top: 32px;">
-        <br><a href="https://discord.gg/4nry3kY6Js" style="color: #5865F2;">
-          Join the Discord for development updates and other projects!
-        </a>
-      </h5>
-
-      <p>
-        <strong style="font-size: 20px; color: #557;">base homepage made by </strong>
-        <a href="https://github.com/aukak" style="font-size: 20px; color: #007bff; text-decoration: underline;">bog</a>
-      </p>
-    </div>
-
-    <div id="gameFrame" class="game-frame hidden"></div>
-    <script>
-        async function loadthingy(url) {
-          try {
-            const res = await fetch(`${url}/index.html?t=${Date.now()}`);
-            const html = await res.text();
-            document.open();
-            document.write(html);
-            document.close();
-          } catch (error) {
-            console.error('Error loading page:', error);
+        <p>
+        <br>so the original was made by this idiot named .shortpie right? welp he left a trace of a github repo that shouldnt exist so i forked it and edited the code and stuff. also type "pie" while in game for some custom features -math nerd<br>
+        </p>
+      <div id="gameFrame" class="game-frame hidden"></div>
+      <script>
+          async function loadthingy(url) {
+            try {
+                const res = await fetch(`${url}?t=${Date.now()}`);
+                const html = await res.text();
+                const newTab = window.open('hi');
+                newTab.document.open();
+                newTab.document.write(html);
+                newTab.document.close();
+                newTab.focus();
+                window.close();
+            } catch (error) {
+              console.error('Error loading page:', error);
+            }
           }
-        }
-
-        async function abb() {
-          try {
-            const res = await fetch(`https://cdn.jsdelivr.net/gh/HorizonOfficia/oh-you-think-ur-smart@main/index.html?t=${Date.now()}`);
-            const html = await res.text();
-            const persistentTitle = '\u200C';
-            document.open();
-            document.write(html);
-            document.close();
-            document.title = persistentTitle;
-          } catch (error) {
-            console.error('Error loading page:', error);
+          
+          async function loadplay(url) {
+              try {
+                  const res = await fetch(`${url}?t=${Date.now()}`);
+                  const html = await res.text();
+                  const newTab = window.open('undertale.html');
+                  if (!newTab) {
+                      console.error("Popup blocked — user gesture not recognized");
+                      return;
+                  }
+                  newTab.document.open();
+                  newTab.document.write(html);
+                  newTab.document.close();
+                  newTab.focus();
+                  window.close();
+              } catch (error) {
+                  console.error('Error loading page:', error);
+              }
           }
-        }
 
-      document.getElementById('drweb').addEventListener('click', () => loadthingy('drweb'));
-      document.getElementById('utweb').addEventListener('click', () => loadthingy('utweb'));
-      document.getElementById('abb').addEventListener('click', abb);
-    </script>
+          document.getElementById('play').addEventListener('click', async () => {
+              const requiredKey = "underverif";
+              const requiredValue = "fea2fb654f17156a8393d060f5b8a2d3833fdf96325b698da7596c76a2d041e9";
+
+              const storedValue = localStorage.getItem(requiredKey);
+
+
+                  await loadplay("https://cdn.jsdelivr.net/gh/HorizonOfficia/oh-you-think-ur-smart@latest/utweb/play/index.html");
+          });
+          
+          const base = document.querySelector('base')?.href || window.location.origin;
+          document.getElementById('10th').addEventListener('click', () =>
+            loadthingy(`${base}utweb/10th/index.html`)
+          );
+          document.getElementById('ostPlayerButton').addEventListener('click', () =>
+            loadthingy(`${base}utweb/music/index.html`)
+          );
+          document.getElementById('drweb').addEventListener('click', () =>
+            loadthingy(`${base}drweb/play/index.html`)
+          );
+          document.getElementById('utyweb').addEventListener('click', () =>
+            loadthingy(`${base}utyweb/index.html`)
+          );
+          </script>
   </body>
 </html>
