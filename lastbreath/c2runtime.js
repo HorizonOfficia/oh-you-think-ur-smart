@@ -3631,25 +3631,28 @@ quat4.str=function(a){return"["+a[0]+", "+a[1]+", "+a[2]+", "+a[3]+"]"};
 		if (this.isWindows8App || this.isWindowsPhone8 || this.isWindowsPhone81 || this.isWindows10)
 			datajs_filename = "data.json";
 		//custom crap start
-		if (this.isWindows8App || this.isWindowsPhone8 || this.isWindowsPhone81 || this.isWindows10)
-			datajs_filename = "data.json";
-		
-		var script = document.createElement("script");
-		
-		// The "?t=" + Date.now() is the "Magic" that kills the cache
-		script.src = datajs_filename + "?t=" + Date.now();
-		
-		script.onload = function () {
-			// No need to call loadProject here if you used the self.loadProject wrapper in data.js
-			console.log("Data loaded fresh from server.");
-		};
-		
-		script.onerror = function () {
-			alert("Failed to load " + datajs_filename);
-		};
-		
-		document.head.appendChild(script);
-		return;
+		// ... existing logic to set datajs_filename ...
+
+var script = document.createElement("script");
+script.src = datajs_filename + "?t=" + Date.now();
+
+script.onload = function () {
+    // We check if the variable exists in the window scope
+    if (typeof window["cr_project_data"] !== "undefined") {
+        self.loadProject(window["cr_project_data"]);
+    } else {
+        // This helps us see if the variable name is wrong
+        console.error("Data.js loaded, but 'cr_project_data' variable not found.");
+        cr.logerror("Project model unavailable");
+    }
+};
+
+script.onerror = function () {
+    alert("Failed to load " + datajs_filename);
+};
+
+document.head.appendChild(script);
+return; // Crucial to stop the original XHR from running
 //custom crap end
 	};
 	Runtime.prototype.initRendererAndLoader = function ()
