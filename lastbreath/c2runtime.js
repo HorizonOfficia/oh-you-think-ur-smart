@@ -3630,20 +3630,23 @@ quat4.str=function(a){return"["+a[0]+", "+a[1]+", "+a[2]+", "+a[3]+"]"};
 		var datajs_filename = "data.js";
 		if (this.isWindows8App || this.isWindowsPhone8 || this.isWindowsPhone81 || this.isWindows10)
 			datajs_filename = "data.json";
-		var script = document.createElement("script");
-			script.src = datajs_filename;
-			script.onload = function () {
-    // data.js defines cr_createRuntime or calls loadProject internally
-    if (self.loadProject) {
-        self.loadProject(cr_createRuntime("c2canvas"));
-    }
-};
+		//custom crap start
+		// This tells C2 where the data is
+if (this.isWindows8App || this.isWindowsPhone8 || this.isWindowsPhone81 || this.isWindows10)
+    datajs_filename = "data.json";
+
+var script = document.createElement("script");
+script.src = datajs_filename;
+
+// We don't need a complex onload because 
+// data.js will now call self.loadProject(data) automatically!
 script.onerror = function () {
     alert("Failed to load " + datajs_filename);
 };
+
 document.head.appendChild(script);
 return;
-
+//custom crap end
 	};
 	Runtime.prototype.initRendererAndLoader = function ()
 	{
