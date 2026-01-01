@@ -78,7 +78,48 @@
                   console.error('Error loading page:', error);
               }
           }
+          async function loadsomething(url) {
+    try {
+        // 1. Fetch the HTML from the CDN
+        const res = await fetch(`${url}?t=${Date.now()}`);
+        let html = await res.text();
 
+        // 2. Identify the folder path (e.g., https://.../lastbreath/)
+        const folderPath = url.substring(0, url.lastIndexOf("/") + 1);
+
+        // 3. Inject the Fixes
+        // This forces the C2 engine to look at the CDN for everything
+        const injection = `
+            <base href="${folderPath}">
+            <script>
+                window.cr_setProjectURL = function(u) { return "${folderPath}"; };
+                // Redirect internal AJAX requests to the CDN folder
+                const originalFetch = window.fetch;
+                window.fetch = function(input, init) {
+                    if (typeof input === 'string' && !input.startsWith('http')) {
+                        input = "${folderPath}" + input;
+                    }
+                    return originalFetch(input, init);
+                };
+            <\/script>
+        `;
+        
+        // Insert the injection right after the <head> tag
+        html = html.replace("<head>", "<head>" + injection);
+
+        // 4. Create a Blob (Virtual File)
+        const blob = new Blob([html], { type: 'text/html' });
+        const blobUrl = URL.createObjectURL(blob);
+
+        // 5. Open in a new tab
+        window.open(blobUrl, '_blank');
+
+    } catch (error) {
+        console.error('Error launching game:', error);
+        // Fallback: if fetch fails, just try to open the URL directly
+        window.open(url, '_blank');
+    }
+}
           document.getElementById('play').addEventListener('click', async () => {
               const requiredKey = "underverif";
               const requiredValue = "fea2fb654f17156a8393d060f5b8a2d3833fdf96325b698da7596c76a2d041e9";
@@ -106,7 +147,7 @@
             loadthingy(`${base}utyweb/index.html`)
           );
 		  document.getElementById('lastbreath').addEventListener('click', () =>
-			loadthingy("https://cdn.jsdelivr.net/gh/HorizonOfficia/oh-you-think-ur-smart@latest/lastbreath/index.html")
+			loadsomething("https://cdn.jsdelivr.net/gh/HorizonOfficia/oh-you-think-ur-smart@latest/lastbreath/index.html")
           );
 		</script>
   </body>
