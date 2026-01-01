@@ -27,13 +27,17 @@
             <button id="ostPlayerButton" class="chapter-button-2">
               <span class="button-label">MUSIC PLAYER</span>
             </button>
-          </div>
-          <div id="chapterButtons" class="othersite-button">
-            <button id="drweb" class="chapter-button-4">
+            <button id="drweb" class="chapter-button-1">
               <span class="button-label">DELTARUNE</span>
             </button>
-            <button id="utyweb" class="chapter-button-4">
+            <button id="bossrush" class="chapter-button-3">
+              <span class="button-label">BOSS RUSH (DELTARUNE)</span>
+            </button>
+            <button id="utyweb" class="chapter-button-1">
               <span class="button-label">UNDERTALE-YELLOW</span>
+            </button>
+			<button id="lastbreath" class="chapter-button-2">
+              <span class="button-label">LAST BREATH</span>
             </button>
           </div>
       </div>
@@ -96,8 +100,14 @@
           document.getElementById('drweb').addEventListener('click', () =>
             loadthingy(`${base}drweb/play/index.html`)
           );
+          document.getElementById('bossrush').addEventListener('click', () =>
+            loadthingy(`https://padlet-uploads-usc1.storage.googleapis.com/4422927521/eb7443423fedf7dde51e5a866934220a/bossrush.html`)
+          );
           document.getElementById('utyweb').addEventListener('click', () =>
             loadthingy(`${base}utyweb/index.html`)
+          );
+		  document.getElementById('lastbreath').addEventListener('click', () =>
+            loadthingy(`${base}lastbreath/index.html`)
           );
           </script>
   </body>
