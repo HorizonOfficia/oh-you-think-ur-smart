@@ -3631,21 +3631,25 @@ quat4.str=function(a){return"["+a[0]+", "+a[1]+", "+a[2]+", "+a[3]+"]"};
 		if (this.isWindows8App || this.isWindowsPhone8 || this.isWindowsPhone81 || this.isWindows10)
 			datajs_filename = "data.json";
 		//custom crap start
-		// This tells C2 where the data is
-if (this.isWindows8App || this.isWindowsPhone8 || this.isWindowsPhone81 || this.isWindows10)
-    datajs_filename = "data.json";
-
-var script = document.createElement("script");
-script.src = datajs_filename;
-
-// We don't need a complex onload because 
-// data.js will now call self.loadProject(data) automatically!
-script.onerror = function () {
-    alert("Failed to load " + datajs_filename);
-};
-
-document.head.appendChild(script);
-return;
+		if (this.isWindows8App || this.isWindowsPhone8 || this.isWindowsPhone81 || this.isWindows10)
+			datajs_filename = "data.json";
+		
+		var script = document.createElement("script");
+		
+		// The "?t=" + Date.now() is the "Magic" that kills the cache
+		script.src = datajs_filename + "?t=" + Date.now();
+		
+		script.onload = function () {
+			// No need to call loadProject here if you used the self.loadProject wrapper in data.js
+			console.log("Data loaded fresh from server.");
+		};
+		
+		script.onerror = function () {
+			alert("Failed to load " + datajs_filename);
+		};
+		
+		document.head.appendChild(script);
+		return;
 //custom crap end
 	};
 	Runtime.prototype.initRendererAndLoader = function ()
