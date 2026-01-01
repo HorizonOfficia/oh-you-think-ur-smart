@@ -3630,70 +3630,20 @@ quat4.str=function(a){return"["+a[0]+", "+a[1]+", "+a[2]+", "+a[3]+"]"};
 		var datajs_filename = "data.js";
 		if (this.isWindows8App || this.isWindowsPhone8 || this.isWindowsPhone81 || this.isWindows10)
 			datajs_filename = "data.json";
-		xhr.open("GET", datajs_filename, true);
-		var supportsJsonResponse = false;
-		if (!this.isDomFree && ("response" in xhr) && ("responseType" in xhr))
-		{
-			try {
-				xhr["responseType"] = "json";
-				supportsJsonResponse = (xhr["responseType"] === "json");
-			}
-			catch (e) {
-				supportsJsonResponse = false;
-			}
-		}
-		if (!supportsJsonResponse && ("responseType" in xhr))
-		{
-			try {
-				xhr["responseType"] = "text";
-			}
-			catch (e) {}
-		}
-		if ("overrideMimeType" in xhr)
-		{
-			try {
-				xhr["overrideMimeType"]("application/json; charset=utf-8");
-			}
-			catch (e) {}
-		}
-		if (this.isWindowsPhone8)
-		{
-			xhr.onreadystatechange = function ()
-			{
-				if (xhr.readyState !== 4)
-					return;
-				self.loadProject(JSON.parse(xhr["responseText"]));
-			};
-		}
-		else
-		{
-			xhr.onload = function ()
-			{
-				if (supportsJsonResponse)
-				{
-					self.loadProject(xhr["response"]);					// already parsed by browser
-				}
-				else
-				{
-					if (self.isEjecta)
-					{
-						var str = xhr["responseText"];
-						str = str.substr(str.indexOf("{"));		// trim any BOM
-						self.loadProject(JSON.parse(str));
-					}
-					else
-					{
-						self.loadProject(JSON.parse(xhr["responseText"]));	// forced to sync parse JSON
-					}
-				}
-			};
-			xhr.onerror = function (e)
-			{
-				cr.logerror("Error requesting " + datajs_filename + ":");
-				cr.logerror(e);
-			};
-		}
-		xhr.send();
+			var script = document.createElement("script");
+			script.src = datajs_filename;
+			script.onload = function () {
+    // data.js defines cr_createRuntime or calls loadProject internally
+    if (self.loadProject) {
+        self.loadProject(cr_createRuntime("c2canvas"));
+    }
+};
+script.onerror = function () {
+    alert("Failed to load " + datajs_filename);
+};
+document.head.appendChild(script);
+return;
+
 	};
 	Runtime.prototype.initRendererAndLoader = function ()
 	{
