@@ -4,9 +4,9 @@
     <meta charset="UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<title>LAST BREATH</title>
-	<base href="https://cdn.jsdelivr.net/gh/HorizonOfficia/oh-you-think-ur-smart@latest/lastbreath/">
+	<base href="https://cdn.jsdelivr.net/gh/HorizonOfficia/oh-you-think-ur-smart@latest/">
 	<!-- Standardised web app manifest -->
-	<link rel="manifest" href="appmanifest.json" />
+	<link rel="manifest" href="lastbreath/appmanifest.json" />
 	
 	<!-- Allow fullscreen mode on iOS devices. (These are Apple specific meta tags.) -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui" />
@@ -17,7 +17,7 @@
 	
 	<!-- Chrome for Android web app tags -->
 	<meta name="mobile-web-app-capable" content="yes" />
-	<link rel="shortcut icon" sizes="256x256" href="icon-256.png" />
+	<link rel="shortcut icon" sizes="256x256" href="lastbreath/icon-256.png" />
 
     <!-- All margins and padding must be zero for the canvas to fill the screen. -->
 	<style type="text/css">
@@ -77,13 +77,13 @@
 	<!-- Pages load faster with scripts at the bottom -->
 	
 	<!-- Construct 2 exported games require jQuery. -->
-	<script src="jquery-3.4.1.min.js"></script>
+	<script src="lastbreath/jquery-3.4.1.min.js"></script>
 
 
 	
     <!-- The runtime script.  You can rename it, but don't forget to rename the reference here as well.
     This file will have been minified and obfuscated if you enabled "Minify script" during export. -->
-	<script src="c2runtime.js"></script>
+	<script src="lastbreath/c2runtime.js"></script>
 
     <script>
 		// Start the Construct 2 project running on window load.
@@ -119,7 +119,7 @@
 				return;		// no SW support, ignore call
 			
 			try {
-				navigator.serviceWorker.register("sw.js", { scope: "./" })
+				navigator.serviceWorker.register("lastbreath/sw.js", { scope: "./" })
 				.then(function (reg)
 				{
 					console.log("Registered service worker on " + reg.scope);
