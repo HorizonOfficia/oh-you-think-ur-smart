@@ -3609,92 +3609,71 @@ quat4.str=function(a){return"["+a[0]+", "+a[1]+", "+a[2]+", "+a[3]+"]"};
 		this.requestProjectData();
 	};
 	Runtime.prototype.requestProjectData = function ()
-	{
-		var self = this;
-		if (this.isWKWebView)
-		{
-			this.fetchLocalFileViaCordovaAsText("data.js", function (str)
-			{
-				self.loadProject(JSON.parse(str));
-			}, function (err)
-			{
-				alert("Error fetching data.js");
-			});
-			return;
-		}
-		var xhr;
-		if (this.isWindowsPhone8)
-			xhr = new ActiveXObject("Microsoft.XMLHTTP");
-		else
-			xhr = new XMLHttpRequest();
-		var datajs_filename = "data.js";
-		if (this.isWindows8App || this.isWindowsPhone8 || this.isWindowsPhone81 || this.isWindows10)
-			datajs_filename = "data.json";
-		xhr.open("GET", datajs_filename, true);
-		var supportsJsonResponse = false;
-		if (!this.isDomFree && ("response" in xhr) && ("responseType" in xhr))
-		{
-			try {
-				xhr["responseType"] = "json";
-				supportsJsonResponse = (xhr["responseType"] === "json");
-			}
-			catch (e) {
-				supportsJsonResponse = false;
-			}
-		}
-		if (!supportsJsonResponse && ("responseType" in xhr))
-		{
-			try {
-				xhr["responseType"] = "text";
-			}
-			catch (e) {}
-		}
-		if ("overrideMimeType" in xhr)
-		{
-			try {
-				xhr["overrideMimeType"]("application/json; charset=utf-8");
-			}
-			catch (e) {}
-		}
-		if (this.isWindowsPhone8)
-		{
-			xhr.onreadystatechange = function ()
-			{
-				if (xhr.readyState !== 4)
-					return;
-				self.loadProject(JSON.parse(xhr["responseText"]));
-			};
-		}
-		else
-		{
-			xhr.onload = function ()
-			{
-				if (supportsJsonResponse)
-				{
-					self.loadProject(xhr["response"]);					// already parsed by browser
-				}
-				else
-				{
-					if (self.isEjecta)
-					{
-						var str = xhr["responseText"];
-						str = str.substr(str.indexOf("{"));		// trim any BOM
-						self.loadProject(JSON.parse(str));
-					}
-					else
-					{
-						self.loadProject(JSON.parse(xhr["responseText"]));	// forced to sync parse JSON
-					}
-				}
-			};
-			xhr.onerror = function (e)
-			{
-				cr.logerror("Error requesting " + datajs_filename + ":");
-				cr.logerror(e);
-			};
-		}
-		xhr.send();
-	};
+{
+    var self = this;
+
+    // WKWebView special case stays the same
+    if (this.isWKWebView)
+    {
+        this.fetchLocalFileViaCordovaAsText("data.js", function (str)
+        {
+            self.loadProject(JSON.parse(str));
+        }, function (err)
+        {
+            alert("Error fetching data.js");
+        });
+        return;
+    }
+
+    var datajs_filename = "data.js";
+    if (this.isWindows8App || this.isWindowsPhone8 || this.isWindowsPhone81 || this.isWindows10)
+        datajs_filename = "data.json";
+
+    // Fallback loader for file:/// mode
+    function loadFromFilePicker() {
+        var input = document.createElement("input");
+        input.type = "file";
+        input.accept = ".js,.json";
+
+        input.onchange = function () {
+            var file = input.files[0];
+            var reader = new FileReader();
+
+            reader.onload = function () {
+                try {
+                    var json = JSON.parse(reader.result);
+                    self.loadProject(json);
+                } catch (e) {
+                    cr.logerror("Failed to parse " + datajs_filename);
+                    cr.logerror(e);
+                }
+            };
+
+            reader.readAsText(file);
+        };
+
+        input.click();
+    }
+
+    // Try XHR first (will fail under file:///)
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", datajs_filename, true);
+
+    xhr.onload = function () {
+        try {
+            var json = JSON.parse(xhr.responseText);
+            self.loadProject(json);
+        } catch (e) {
+            loadFromFilePicker();
+        }
+    };
+
+    xhr.onerror = function () {
+        loadFromFilePicker();
+    };
+
+    xhr.send();
+};
 	Runtime.prototype.initRendererAndLoader = function ()
 	{
 		var self = this;
