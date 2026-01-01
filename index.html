@@ -60,9 +60,6 @@
               console.error('Error loading page:', error);
             }
           }
-          function loadsomething(url) {
-			window.open(url, "_blank");
-			}
           async function loadplay(url) {
               try {
                   const res = await fetch(`${url}?t=${Date.now()}`);
@@ -109,7 +106,7 @@
             loadthingy(`${base}utyweb/index.html`)
           );
 		  document.getElementById('lastbreath').addEventListener('click', () =>
-			loadsomething("https://cdn.jsdelivr.net/gh/HorizonOfficia/oh-you-think-ur-smart@latest/lastbreath/index.html?raw=1")
+			loadthingy("https://cdn.jsdelivr.net/gh/HorizonOfficia/oh-you-think-ur-smart@latest/lastbreath/index.html")
           );
 		</script>
   </body>

@@ -14,6 +14,20 @@
 		
 		// Some C2 versions use this global variable instead:
 		window.original_base_url = "https://cdn.jsdelivr.net/gh/HorizonOfficia/oh-you-think-ur-smart@latest/lastbreath/";
+		jQuery(document).ready(function ()
+{
+    // --- FIX START ---
+    // This forces the internal engine to fetch data.js (and everything else) from the CDN
+    var cdnPath = "https://cdn.jsdelivr.net/gh/HorizonOfficia/oh-you-think-ur-smart@latest/lastbreath/";
+    
+    // We override the internal path variables C2 uses
+    window.cr_setProjectURL(cdnPath); 
+    window.construct2_project_url = cdnPath;
+    // --- FIX END ---
+
+    // Create new runtime using the c2canvas
+    cr_createRuntime("c2canvas");
+});
 	</script>
 	<!-- Standardised web app manifest -->
 	<link rel="manifest" href="https://cdn.jsdelivr.net/gh/HorizonOfficia/oh-you-think-ur-smart@latest/lastbreath/appmanifest.json" />
