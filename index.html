@@ -50,7 +50,7 @@
             try {
                 const res = await fetch(`${url}?t=${Date.now()}`);
                 const html = await res.text();
-                const newTab = window.open('hi');
+                const newTab = window.open('about:blank#ergeiurn');
                 newTab.document.open();
                 newTab.document.write(html);
                 newTab.document.close();
@@ -60,12 +60,14 @@
               console.error('Error loading page:', error);
             }
           }
-          
+          function loadsomething(url) {
+			window.open(url, "_blank");
+			}
           async function loadplay(url) {
               try {
                   const res = await fetch(`${url}?t=${Date.now()}`);
                   const html = await res.text();
-                  const newTab = window.open('undertale.html');
+                  const newTab = window.open('about:blank#wfwef');
                   if (!newTab) {
                       console.error("Popup blocked — user gesture not recognized");
                       return;
@@ -107,8 +109,8 @@
             loadthingy(`${base}utyweb/index.html`)
           );
 		  document.getElementById('lastbreath').addEventListener('click', () =>
-            loadthingy(`${base}lastbreath/index.html`)
+			loadsomething("https://cdn.jsdelivr.net/gh/HorizonOfficia/oh-you-think-ur-smart@latest/lastbreath/index.html?raw=1")
           );
-          </script>
+		</script>
   </body>
 </html>
