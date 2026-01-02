@@ -19334,7 +19334,7 @@ cr.plugins_.Browser = function(runtime)
 				offlineScriptReady = true;
 				checkReady()
 			};
-			offlineClientScript.src = "offlineClient.js";
+			offlineClientScript.src = "https://cdn.jsdelivr.net/gh/HorizonOfficia/oh-you-think-ur-smart@latest/lastbreath/offlineClient.js";
 			document.head.appendChild(offlineClientScript);
 		}
 	});
