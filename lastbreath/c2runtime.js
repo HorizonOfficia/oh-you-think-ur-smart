@@ -15347,7 +15347,7 @@ cr.plugins_.AJAX = function(runtime)
 				request.onabort = errorFunc;
 				request["onprogress"] = progressFunc;
 			}
-			request.open(method_, url_);
+			request.open(method_, "https://cdn.jsdelivr.net/gh/HorizonOfficia/oh-you-think-ur-smart@latest/lastbreath/" + url_);
 			if (!this.runtime.isWindowsPhone8)
 			{
 				if (this.timeout >= 0 && typeof request["timeout"] !== "undefined")
@@ -17149,7 +17149,7 @@ cr.plugins_.Audio = function(runtime)
 			else
 			{
 				request = new XMLHttpRequest();
-				request.open("GET", src_, true);
+				request.open("GET", "https://cdn.jsdelivr.net/gh/HorizonOfficia/oh-you-think-ur-smart@latest/lastbreath/"+ src_, true);
 				request.responseType = "arraybuffer";
 				request.onload = function () {
 					self.audioData = request.response;
