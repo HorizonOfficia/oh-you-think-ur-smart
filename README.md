@@ -1,1 +1,2 @@
-# 4d805929a56127294533552e2bc3409717f045fdd40615fda6518d72a50cd9ed2a9f08f8488a389fe8d26a4c103c2514cf32
+this shouldn't exist but here we are
+while i'm at it i edited the right spots of a file called c2runtime.js which is i think 30000 lines long and got it to work here. and i did it TWICE. if i dont get a cookie ill find you and murber u
