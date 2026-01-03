@@ -7702,7 +7702,7 @@ Runtime.prototype.requestProjectData = function ()
 		}
 		else
 		{
-			img.src = src;
+			img.src = "https://cdn.jsdelivr.net/gh/HorizonOfficia/oh-you-think-ur-smart@latest/lastbreath/" + src;
 		}
 	};
 	Runtime.prototype.setCtxImageSmoothingEnabled = function (ctx, e)
